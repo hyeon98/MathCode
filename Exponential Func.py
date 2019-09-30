@@ -28,17 +28,27 @@ pygame.display.set_caption("Title")
 screen.fill(WHITE)
 
 
-cut = 50
-myfont = pygame.font.SysFont('Comic Sans MS', (int)(cut / 5))
+step = 50
+stepX = step
+stepY = step/5
+myfont = pygame.font.SysFont('Comic Sans MS', (int)(step / 5))
 centor = (screenWidth / 2) - 1
 # abc = 1
 for tempN in range(0, screenWidth):
-    if tempN % cut == cut - 1:
+    if tempN % step == step - 1:
         pygame.draw.line(screen, GARY, [tempN , 0], [tempN, screenHeight], 1)
+        # pygame.draw.line(screen, GARY, [0 , tempN], [screenWidth, tempN], 1)
+        
+        textsurface = myfont.render(str((tempN - screenWidth / 2 + 1) / stepX), True, (0, 0, 0))
+        screen.blit(textsurface, (tempN + 3, screenHeight / 2))
+
+    if tempN % step == step - 1:
+        # pygame.draw.line(screen, GARY, [tempN , 0], [tempN, screenHeight], 1)
         pygame.draw.line(screen, GARY, [0 , tempN], [screenWidth, tempN], 1)
         
-        textsurface = myfont.render(str((tempN - screenWidth / 2 + 1) / cut), True, (0, 0, 0))
-        screen.blit(textsurface, (tempN + 3, screenHeight / 2))
+        if tempN != centor:
+            textsurface = myfont.render(str((screenHeight / 2 - tempN - 1) / stepY), True, (0, 0, 0))
+            screen.blit(textsurface, (screenWidth / 2 + 3, tempN))
 
 pygame.draw.line(screen, BLACK, [0, centor], [screenWidth, centor], 2)
 pygame.draw.line(screen, BLACK, [centor, 0], [centor, screenHeight], 2)
@@ -48,13 +58,15 @@ textsurface = myfont.render('JHS', True, (0, 0, 0))
 screen.blit(textsurface, (10, 0))
 
 count = 0.01
-for i in range(1, 1000):
+for i in range(1, 10000):
     tempX = count
     tempY = math.log(tempX)
+    tempX = tempY
+    tempY = count
     # print(tempX, ", ", tempY)
 
-    drawX = (tempX * cut) + centor
-    drawY = screenHeight - ((tempY * cut) + centor)
+    drawX = (tempX * stepX) + centor
+    drawY = screenHeight - ((tempY * stepY) + centor)
     # print(drawX, ", ", drawY)
 
     pygame.draw.rect(screen, RED, [drawX, drawY, 1, 1])
