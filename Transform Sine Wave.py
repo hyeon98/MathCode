@@ -30,7 +30,7 @@ pygame.display.set_caption("Title")
 screen.fill(WHITE)
 
 
-step = 50
+step = 80
 stepX = step
 stepY = step
 myfont = pygame.font.SysFont('Comic Sans MS', (int)(step / 5))
@@ -62,28 +62,31 @@ screen.blit(textsurface, (10, 0))
 count = 0.0
 preTempY = 0.0
 countDistanceX = 0
-distanceX = math.pi * (countDistanceX / 100)
+distanceX = math.pi * (countDistanceX / 1000)
 
-while distanceX < math.pi * 2:
+while distanceX < math.pi * 20:
 
     tempX = distanceX
     sine1 = math.sin(distanceX)
-    sumSine = sine1
+    sine2 = math.sin(distanceX * 1.5)
+    sumSine = sine1 + sine2
     tempY = sumSine
 
     drawX = (tempX * stepX) + centor
     drawY = screenHeight - ((tempY * stepY) + centor)
     # print(drawX, ", ", drawY)
 
+    pygame.draw.rect(screen, GREEN, [drawX, drawY, 1, 1])
     
-    tempTheta = math.pi * 2 / 90 * countDistanceX
-    cvtX = tempY * math.cos(math.radians(90 - tempTheta)) * stepX + centor
-    print(math.cos(math.radians(60)))
-    cvtY = screenHeight - (tempY * math.sin(math.radians(90 - tempTheta)) * stepY + centor)
+    tempTheta = 360 / (math.pi * 4) * distanceX
+    # print(math.pi * 2, ", ", math.pi * 2 / 360, ", ", distanceX, ", ", tempTheta)
+    cvtX = stepX * tempY * math.cos(math.radians(90 - tempTheta)) + centor
+    # print(90 - countDistanceX)
+    cvtY = screenHeight - (stepY * tempY * math.sin(math.radians(90 - tempTheta)) + centor)
     pygame.draw.rect(screen, RED, [cvtX, cvtY, 1, 1])
 
     countDistanceX += 1
-    distanceX = math.pi * (countDistanceX / 100)
+    distanceX = math.pi * (countDistanceX / 1000)
 
 #Loop until the user clicks the close button.
 done = False
