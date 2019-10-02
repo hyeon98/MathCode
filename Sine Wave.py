@@ -1,3 +1,5 @@
+#this is the code that embodies sine wave
+
 # Import a library of functions called 'pygame'
 import pygame
 from random import *
@@ -18,8 +20,8 @@ RED   = (255,   0,   0)
 
 pygame.init()
 
-screenWidth = 500
-screenHeight = 500
+screenWidth = 800
+screenHeight = 800
 size   = [screenWidth, screenHeight]
 screen = pygame.display.set_mode(size)
 
@@ -30,7 +32,7 @@ screen.fill(WHITE)
 
 step = 50
 stepX = step
-stepY = step/10
+stepY = step
 myfont = pygame.font.SysFont('Comic Sans MS', (int)(step / 5))
 centor = (screenWidth / 2) - 1
 # abc = 1
@@ -57,19 +59,43 @@ myfont = pygame.font.SysFont('Comic Sans MS', 30)
 textsurface = myfont.render('JHS', True, (0, 0, 0))
 screen.blit(textsurface, (10, 0))
 
-count = 0.01
-for i in range(1, 10000):
-    tempX = math.log(count)
-    tempY = count
+count = 0.0
+preTempY = 0.0
+countDistanceX = 0
+distanceX = math.pi * (countDistanceX / 100)
+# if distanceX <= 0:
+#     distanceX = 0.01
+# for i in range(1, (int)(screenWidth * distanceX * stepX * 2)):
+while not (distanceX > screenWidth/stepX/2):
+    tempX = distanceX
+    sine1 = math.sin(distanceX)
+    sine2 = math.sin(distanceX * 2)
+    sine3 = math.sin(distanceX * 3) * 2
+    sine4 = math.sin(distanceX * 4) * 0.5
+    sumSine = sine1
+    tempY = sumSine
     # print(tempX, ", ", tempY)
+    # print(sine1, ", ", sine2, ", ", sumSine)
+    if (tempY < 0.01) & (tempY > -0.01):
+        print(tempX, ", ", tempY)
 
     drawX = (tempX * stepX) + centor
     drawY = screenHeight - ((tempY * stepY) + centor)
     # print(drawX, ", ", drawY)
 
+    # drawSine1 = screenHeight - ((sine1 * stepY) + centor)
+    # drawSine2 = screenHeight - ((sine2 * stepY) + centor)
+    # drawSine3 = screenHeight - ((sine3 * stepY) + centor)
+    # drawSine4 = screenHeight - ((sine4 * stepY) + centor)
+    # pygame.draw.rect(screen, GREEN, [drawX, drawSine1, 1, 1])
+    # pygame.draw.rect(screen, GREEN, [drawX, drawSine2, 1, 1])
+    # pygame.draw.rect(screen, GREEN, [drawX, drawSine3, 1, 1])
+    # pygame.draw.rect(screen, GREEN, [drawX, drawSine4, 1, 1])
+
     pygame.draw.rect(screen, RED, [drawX, drawY, 1, 1])
 
-    count += 0.01
+    countDistanceX += 1
+    distanceX = math.pi * (countDistanceX / 100)
 
 #Loop until the user clicks the close button.
 done = False

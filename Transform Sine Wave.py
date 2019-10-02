@@ -1,3 +1,5 @@
+#this is the code that embodies sine wave
+
 # Import a library of functions called 'pygame'
 import pygame
 from random import *
@@ -18,8 +20,8 @@ RED   = (255,   0,   0)
 
 pygame.init()
 
-screenWidth = 500
-screenHeight = 500
+screenWidth = 800
+screenHeight = 800
 size   = [screenWidth, screenHeight]
 screen = pygame.display.set_mode(size)
 
@@ -30,7 +32,7 @@ screen.fill(WHITE)
 
 step = 50
 stepX = step
-stepY = step/10
+stepY = step
 myfont = pygame.font.SysFont('Comic Sans MS', (int)(step / 5))
 centor = (screenWidth / 2) - 1
 # abc = 1
@@ -57,19 +59,31 @@ myfont = pygame.font.SysFont('Comic Sans MS', 30)
 textsurface = myfont.render('JHS', True, (0, 0, 0))
 screen.blit(textsurface, (10, 0))
 
-count = 0.01
-for i in range(1, 10000):
-    tempX = math.log(count)
-    tempY = count
-    # print(tempX, ", ", tempY)
+count = 0.0
+preTempY = 0.0
+countDistanceX = 0
+distanceX = math.pi * (countDistanceX / 100)
+
+while distanceX < math.pi * 2:
+
+    tempX = distanceX
+    sine1 = math.sin(distanceX)
+    sumSine = sine1
+    tempY = sumSine
 
     drawX = (tempX * stepX) + centor
     drawY = screenHeight - ((tempY * stepY) + centor)
     # print(drawX, ", ", drawY)
 
-    pygame.draw.rect(screen, RED, [drawX, drawY, 1, 1])
+    
+    tempTheta = math.pi * 2 / 90 * countDistanceX
+    cvtX = tempY * math.cos(math.radians(90 - tempTheta)) * stepX + centor
+    print(math.cos(math.radians(60)))
+    cvtY = screenHeight - (tempY * math.sin(math.radians(90 - tempTheta)) * stepY + centor)
+    pygame.draw.rect(screen, RED, [cvtX, cvtY, 1, 1])
 
-    count += 0.01
+    countDistanceX += 1
+    distanceX = math.pi * (countDistanceX / 100)
 
 #Loop until the user clicks the close button.
 done = False
