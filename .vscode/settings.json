@@ -1,3 +1,7 @@
 {
-    "python.linting.pylintArgs": ["--errors-only", "--disable=no-member"]
+    "python.linting.pylintArgs": [
+        "--errors-only",
+        "--disable=no-member"
+    ],
+    "python.pythonPath": "c:\\Work\\Git\\MathCode\\env\\Scripts\\python.exe"
 }

@@ -11,6 +11,7 @@ def FT(x):
     return result
 
 # Define the colors we will use in RGB format
+
 BLACK = (  0,   0,   0)
 GARY  = (200, 200, 200)
 WHITE = (255, 255, 255)
@@ -67,9 +68,9 @@ distanceX = math.pi * (countDistanceX / 1000)
 while distanceX < math.pi * 20:
 
     tempX = distanceX
-    sine1 = math.sin(distanceX)
+    sine1 = math.sin(distanceX * 0.5)
     sine2 = math.sin(distanceX * 1.5)
-    sumSine = sine1 + sine2
+    sumSine = sine1
     tempY = sumSine
 
     drawX = (tempX * stepX) + centor
